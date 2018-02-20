@@ -18,11 +18,6 @@ class ResourcesController < ApplicationController
 
   # Index a resource to one of the categories [ used by admin ]
   def index_category
-    if ![ 'a98be6b7-57c0-4899-95dd-53f0edc5b6c9', '82a55931-96c1-498d-a9f8-9c5f0dd24947',
-      '6579dcca-5e9a-4aef-abf3-0d05d4297692', 'd9f56033-a68e-421d-b8a3-b8a87a9ce829'].include? @current_user.id
-      raise Exception
-    end
-
     stream = Stream.friendly.find( params[ :streamSlug ] )
     if ResourcesStreams.create( stream_id: stream.id, resource_id: @resource.id )
       render json: { success: true }
